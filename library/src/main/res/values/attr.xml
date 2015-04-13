@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="MeterView">
+
+
+        <attr name="mv_markerBigSzie" format="dimension" />
+        <attr name="mv_markerSmallSzie" format="dimension" />
+        <attr name="mv_markerTextSzie" format="dimension" />
+
+        <attr name="mv_markerBigColor" format="color" />
+        <attr name="mv_markerSmallColor" format="color" />
+        <attr name="mv_markerTextColor" format="color" />
+
+        <attr name="mv_showMarkerBig" format="boolean" />
+        <attr name="mv_showMarkerSmall" format="boolean" />
+        <attr name="mv_showMarkerText" format="boolean" />
+
+        <attr name="mv_showCenterPoint" format="boolean" />
+        <attr name="mv_centerPointColor" format="color" />
+        <attr name="mv_centerPointSize" format="dimension" />
+
+        <attr name="mv_headColor" format="color" />
+        <attr name="mv_headWidth" format="dimension" />
+
+        <attr name="mv_minValue" format="float" />
+        <attr name="mv_maxValue" format="float" />
+        <attr name="mv_value" format="float" />
+
+        <attr name="mv_textColor" format="color" />
+        <attr name="mv_textSize" format="dimension" />
+
+        <attr name="mv_backgroundColor" format="color" />
+    </declare-styleable>
+</resources>

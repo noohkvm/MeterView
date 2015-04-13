@@ -1,0 +1,12 @@
+<resources>
+
+    <dimen name="mv_marker_width">1dp</dimen>
+    <dimen name="mv_small_marker">5dp</dimen>
+    <dimen name="mv_big_marker">10dp</dimen>
+    <dimen name="mv_marker_text_size">12sp</dimen>
+    <dimen name="mv_center_point_size">2dp</dimen>
+    <dimen name="mv_head_width">1dp</dimen>
+    <dimen name="mv_text_size">24sp</dimen>
+    <dimen name="mv_text_padding">4dp</dimen>
+    <dimen name="mv_default_size">250dp</dimen>
+</resources>
