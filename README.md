@@ -12,7 +12,7 @@ you just add the following dependency to your build.gradle:
     repositories {
         mavenCentral()
     }
-    compile 'com.anwios.meterview.view:meterview:1.0.0'
+    compile 'com.anwios.meterview.view:meterview:1.1.2'
   }
 ```
 
