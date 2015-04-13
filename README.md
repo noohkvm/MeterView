@@ -51,7 +51,16 @@ you just add the following dependency to your build.gradle:
         app:mv_textSize="64sp"
         app:mv_value="40.6" />
 ```
-
+```java
+      MeterView meterView= (MeterView) findViewById(R.id.mv);
+      
+      //set value with animation
+      meterView.moveHeadTo(300);
+      //you can use meterView.setValue() to set value with out animation
+      
+      // to set Interpolator
+      meterView.setInterpolator(new BounceInterpolator());
+  ```
  sample
  ![sample 1](images/sample.png)
  
