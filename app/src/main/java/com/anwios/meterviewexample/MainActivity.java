@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.BounceInterpolator;
 import android.widget.Button;
 
 import com.anwios.meterview.view.MeterView;
@@ -26,6 +27,8 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         bt3.setOnClickListener(this);
         bt4.setOnClickListener(this);
 
+        MeterView meterView= (MeterView) findViewById(R.id.mv2);
+        meterView.setInterpolator(new BounceInterpolator());
     }
 
 

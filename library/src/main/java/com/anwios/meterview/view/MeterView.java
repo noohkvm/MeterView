@@ -8,7 +8,10 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
+import android.view.animation.BounceInterpolator;
+import android.view.animation.Interpolator;
 
 import com.anwios.meterview.R;
 import com.nineoldandroids.animation.ObjectAnimator;
@@ -18,46 +21,48 @@ public class MeterView extends View {
     // ===========================================================
     // Constants
     // ===========================================================
-    public static final int DEFAULT_SIZE = 300;
+    private  static final int DEFAULT_SIZE = 300;
 
     // ===========================================================
     // Fields
     // ===========================================================
-    Paint p = new Paint(Paint.ANTI_ALIAS_FLAG);
-    Paint markerTextPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 
-    float minValue = 0;
-    float maxValue = 300;
+    private Paint p = new Paint(Paint.ANTI_ALIAS_FLAG);
+    private Paint markerTextPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+
+    private float minValue = 0;
+    private float maxValue = 300;
 
 
-    boolean showMarkerBig = true;
-    boolean showMarkerSmall = true;
-    float markerBigSize;
-    float markerSmallSiae;
-    int markerBigColor;
-    int markerSmallColor;
-    float markerWidth;
+    private boolean showMarkerBig = true;
+    private boolean showMarkerSmall = true;
+    private float markerBigSize;
+    private float markerSmallSiae;
+    private int markerBigColor;
+    private int markerSmallColor;
+    private float markerWidth;
 
-    boolean showMarkerText;
-    float markerTextSize;
-    int markerTextColor;
+    private boolean showMarkerText;
+    private float markerTextSize;
+    private int markerTextColor;
 
-    boolean showCenterPoint;
-    float centerPointSize;
-    int centerPointColor;
+    private boolean showCenterPoint;
+    private float centerPointSize;
+    private int centerPointColor;
 
-    float headWidth;
-    int headColor;
+    private float headWidth;
+    private int headColor;
 
-    float textSize;
-    int textColor;
-    int textPadding;
-    float value;
+    private float textSize;
+    private int textColor;
+    private int textPadding;
+    private  float value;
 
-    int backgroundColor;
+    private int backgroundColor;
 
-    ObjectAnimator animator;
-    float currentPoint;
+    private ObjectAnimator animator;
+    private Interpolator interpolator;
+    private float currentPoint;
 
     // ===========================================================
     // Constructors
@@ -261,15 +266,22 @@ public class MeterView extends View {
         movePointer();
     }
 
+    public void setInterpolator(Interpolator i){
+        interpolator=i;
+    }
     private int dpToPx(int dp) {
         DisplayMetrics displayMetrics = getContext().getResources().getDisplayMetrics();
         int px = Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
         return px;
     }
 
-    public void movePointer() {
+    private void movePointer() {
         animator = ObjectAnimator.ofFloat(this, "value", currentPoint, value);
-        animator.setDuration(4000);
+        int duration=(int)((Math.abs(value-currentPoint)/maxValue)*4000);
+        animator.setDuration(duration);
+        if(interpolator!=null){
+            animator.setInterpolator(interpolator);
+        }
         animator.start();
     }
 }
