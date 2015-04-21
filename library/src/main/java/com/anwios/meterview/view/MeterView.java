@@ -6,6 +6,8 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -207,7 +209,29 @@ public class MeterView extends View {
 
         super.onDraw(canvas);
     }
+    @Override
+    public Parcelable onSaveInstanceState() {
 
+        Parcelable superState = super.onSaveInstanceState();
+
+        SavedState state = new SavedState(superState);
+        state.value = this.value;
+        return state;
+    }
+
+    @Override
+    public void onRestoreInstanceState(Parcelable state) {
+
+        if (!(state instanceof SavedState)) {
+            super.onRestoreInstanceState(state);
+            return;
+        }
+
+        SavedState savedState = (SavedState) state;
+        super.onRestoreInstanceState(savedState.getSuperState());
+
+        this.value = savedState.value;
+    }
     // ===========================================================
     // Methods
     // ===========================================================
@@ -283,5 +307,35 @@ public class MeterView extends View {
             animator.setInterpolator(interpolator);
         }
         animator.start();
+    }
+
+    public static class SavedState extends BaseSavedState {
+        private float value;
+
+        SavedState(Parcelable superState) {
+            super(superState);
+        }
+
+        private SavedState(Parcel in) {
+            super(in);
+            this.value = in.readFloat();
+        }
+
+        @Override
+        public void writeToParcel(Parcel out, int flags) {
+            super.writeToParcel(out, flags);
+            out.writeFloat(this.value);
+        }
+
+        public static final Parcelable.Creator<SavedState> CREATOR =
+                new Parcelable.Creator<SavedState>() {
+                    public SavedState createFromParcel(Parcel in) {
+                        return new SavedState(in);
+                    }
+
+                    public SavedState[] newArray(int size) {
+                        return new SavedState[size];
+                    }
+                };
     }
 }
